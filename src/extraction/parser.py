@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import re
 
-from config import KNBS_STAGING,TABLE_2_3,KNBS_PROCESSED
+from config import VOL2_STAGING,TABLE_2_3_VOL2,VOL2_PROCESSED
 
 # ---------------------------------------------------
 # Rows whose first token matches these are table headers
@@ -27,9 +27,8 @@ HEADER_WORDS = {
 
 def load_rows():
     rows_file =(
-        KNBS_STAGING
-        /"volume_ii"
-        /f"{TABLE_2_3['output_name']}_rows.json"
+        VOL2_STAGING
+        /f"{TABLE_2_3_VOL2['output_name']}_rows.json"
     )
 
     with open(rows_file,encoding="utf-8")as f:
@@ -181,13 +180,14 @@ def main():
 
     df = pd.DataFrame(records)
 
-    output_folder = (
-        KNBS_PROCESSED
-        / "volume_ii"
-    )
+    output_folder = VOL2_PROCESSED
+
     output_folder.mkdir(parents=True, exist_ok=True)
 
-    output_file = output_folder/ f"{TABLE_2_3["output_name"]}.csv"
+    output_file = (
+        output_folder
+        / f"{TABLE_2_3_VOL2["output_name"]}.csv"
+    )
 
     df.to_csv(output_file, index=False)
 

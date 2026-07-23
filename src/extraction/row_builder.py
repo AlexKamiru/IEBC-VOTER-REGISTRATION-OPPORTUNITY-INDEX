@@ -1,7 +1,7 @@
 import json
 from collections import defaultdict
 
-from config import KNBS_STAGING,TABLE_2_3
+from config import VOL2_STAGING,TABLE_2_3_VOL2
 
 def build_rows(words, tolerance=2):
     """
@@ -33,15 +33,13 @@ def build_rows(words, tolerance=2):
 
 def main():
     input_file = (
-        KNBS_STAGING
-        / "volume_ii"
-        /f"{TABLE_2_3['output_name']}_words.json"
+        VOL2_STAGING
+        /f"{TABLE_2_3_VOL2['output_name']}_words.json"
     )
 
     output_file = (
-        KNBS_STAGING
-        / "volume_ii"
-        / f"{TABLE_2_3['output_name']}_rows.json"
+        VOL2_STAGING
+        / f"{TABLE_2_3_VOL2['output_name']}_rows.json"
     )
 
     with open(input_file, encoding="utf-8") as f:
